@@ -1,33 +1,39 @@
-class Contact:
-    def __init__(self, name, phone, email):
-        self.name = name
-        self.phone = phone
-        self.email = email
-    
-    def __str__(self):
-        return f"Name: {self.name} Phone: {self.phone} Email: {self.email}"
+import re
+import Contact
+from datetime import datetime
 
 class ContactBookManager:
     def __init__(self):
         self.contacts = []
 
     def add_contact(self):
+        pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+
         name = input("Enter name: ")
         phone = input("Enter phone: ")
         email = input("Enter email: ")
+        created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         for contact in self.contacts:
             if contact.name == name:
                 print("Contact already exists")
                 return
+
+        if not re.fullmatch(r"^\d{10}$",phone):
+            print("Invalid phone number format")
+            return
+
+        if not re.match(pattern, email):
+            print("Invalid email format")
+            return
         
-        new_contact = Contact(name, phone, email)
+        new_contact = Contact.Contact(name, phone, email, created_at)
         self.contacts.append(new_contact)
         print("Contact added successfully.")
     
     def view_all(self):
         if not self.contacts:
-            print("No contacts found.")
+            print("error: 404 No contacts found.")
             return
         
         for contact in self.contacts:
@@ -62,35 +68,3 @@ class ContactBookManager:
                 return
 
         print("Contact not found.")
-    
-def main():
-    manager = ContactBookManager()
-
-    while True:
-        print("*******Select the task that you want to perform*******")
-        print("1: Add contact")
-        print("2: View all")
-        print("3: Search")
-        print("4: Delete")
-        print("5: Update contact")
-        print("6: Exit")
-    
-        choice = input("")
- 
-        if choice == "1":
-            manager.add_contact()
-        elif choice == "2":
-            manager.view_all()
-        elif choice == "3":
-            manager.search_contact()
-        elif choice == "4":
-            manager.delete_contact()
-        elif choice == "5":
-            manager.update_contact()
-        elif choice == "6":
-            print("William was here ...")
-            break
-        else:
-            print("Invalid choice")
-            
-main()
