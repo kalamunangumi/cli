@@ -39,11 +39,43 @@ class ContactBookManager:
         for contact in self.contacts:
             print(contact)
 
-    def search_contact(self):
+    def search_by_name(self):
         name = input("Enter name to search ...")
 
         for contact in self.contacts:
             if contact.name.lower() == name.lower():
+                print(contact)
+                return
+
+        print("Contact not found.")
+
+    def search_by_phone(self):
+        phone = input("Enter phone number to search ...")
+
+        for contact in self.contacts:
+            if contact.phone == phone:
+                print(contact)
+                return
+
+        print("Contact not found.")
+
+
+    def search_by_email(self):
+        email = input("Enter email to search ...")
+
+        for contact in self.contacts:
+            if contact.email.lower() == email.lower():
+                print(contact)
+                return
+
+        print("Contact not found.")
+
+
+    def search_by_date(self):
+        date = input("Enter date to search ...")
+
+        for contact in self.contacts:
+            if contact.date == date:
                 print(contact)
                 return
 

@@ -19,7 +19,21 @@ def main():
         elif choice == "2":
             manager.view_all()
         elif choice == "3":
-            manager.search_contact()
+            print("1: Search contact by name")
+            print("2: Search contact by phone")
+            print("3: Search contact by email")
+            print("4: Search contact by created date")
+            search_choice = input("Select search criteria: ")
+            if search_choice == '1':
+                manager.search_by_name()
+            elif search_choice == '2':
+                manager.search_by_phone()
+            elif search_choice == '3':
+                manager.search_by_email()
+            elif search_choice == '4':
+                manager.search_by_date()
+            else:
+                print("Invalid choice")
         elif choice == "4":
             manager.delete_contact()
         elif choice == "5":
